@@ -1,0 +1,23 @@
+{
+  "name": "diacritic",
+  "version": "0.1.0",
+  "description": "Replace diacritic characters with alternatives",
+  "main": "index.js",
+  "devDependencies": {
+    "chai": "^1.9.1",
+    "mocha": "^1.21.4"
+  },
+  "scripts": {
+    "test": "make test"
+  },
+  "keywords": [
+    "diacritics"
+  ],
+  "author": "Mark Robson <mark.o.robson@gmail.com> (http://whiteforest.co.uk/)",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/brentertz/scapegoat/blob/master/LICENSE-MIT"
+    }
+  ]
+}
