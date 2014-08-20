@@ -44,5 +44,21 @@ describe("diacritic", function() {
 
 	});
 
+	describe("createFriendlyString", function() {
+
+		it('Invalid param', function() {
+			expect(diacritic.createFriendlyString(undefined)).to.equal(undefined);
+		});
+
+		it('999', function() {
+			expect(diacritic.createFriendlyString(999)).to.equal(999);
+		});
+
+		it('Rise of the dead', function() {
+			expect(diacritic.createFriendlyString("Rise of the dead")).to.equal("rise-dead");
+		});
+
+	});
+
 });
 

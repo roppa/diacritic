@@ -107,5 +107,52 @@ module.exports = {
         }
         str = str.replace(/[\\"']/g, '\\$&').replace(/\u0000/g, '\\0');
         return str;
+    },
+    createFriendlyString: function(name) {
+        var friendlyName;
+        if (!!!name || typeof name !== "string") {
+            return name;
+        }
+        //first, strip out any html
+        friendlyName = name.toString().toLowerCase().replace(/'|&rsquo;|(<([^>]+)>)/g, "");
+        //remove
+        friendlyName = this.remove(this.removeSymbols(friendlyName));
+        //the: start of line "the ", or " the " global, or " the" end of line
+        //the: start of line "the-", or "-the-" global, or " the-" end of line
+        friendlyName = friendlyName.replace(/[\s-]the$|^the[\s-]|[\s-]the[\s-]/g, " ");
+        //les
+        friendlyName = friendlyName.replace(/[\s-]les$|^les[\s-]|[\s-]les[\s-]/g, " ");
+        //des
+        friendlyName = friendlyName.replace(/[\s-]des$|^des[\s-]|[\s-]des[\s-]/g, " ");
+        //dei
+        friendlyName = friendlyName.replace(/[\s-]dei$|^dei[\s-]|[\s-]dei[\s-]/g, " ");
+        //le
+        friendlyName = friendlyName.replace(/[\s-]le$|^le[\s-]|[\s-]le[\s-]/g, " ");
+        //di
+        friendlyName = friendlyName.replace(/[\s-]di$|^di[\s-]|[\s-]di[\s-]/g, " ");
+        //al
+        friendlyName = friendlyName.replace(/[\s-]al$|^al[\s-]|[\s-]al[\s-]/g, " ");
+        //il
+        friendlyName = friendlyName.replace(/[\s-]il$|^il[\s-]|[\s-]il[\s-]/g, " ");
+        //de
+        friendlyName = friendlyName.replace(/[\s-]de$|^de[\s-]|[\s-]de[\s-]/g, " ");
+        //du
+        friendlyName = friendlyName.replace(/[\s-]du$|^du[\s-]|[\s-]du[\s-]/g, " ");
+        //el
+        friendlyName = friendlyName.replace(/[\s-]el$|^el[\s-]|[\s-]el[\s-]/g, " ");
+        //la
+        friendlyName = friendlyName.replace(/[\s-]la$|^la[\s-]|[\s-]la[\s-]/g, " ");
+        //of
+        friendlyName = friendlyName.replace(/[\s-]of$|^of[\s-]|[\s-]of[\s-]/g, " ");
+        //a
+        friendlyName = friendlyName.replace(/[\s-]a$|^a[\s-]|[\s-]a[\s-]/g, " ");
+
+        //remove symbols and foreign characters
+        friendlyName = friendlyName.
+                        replace(/\s/g, "-"). //remove whitespace, periods
+                        replace(/-{2,}/g, "-"). //multiple hyphens into one
+                        replace(/[^-a-zA-Z0-9]/g, ''); //just remove any other symbol
+        friendlyName = friendlyName.replace(/^-|-$/g, "");//remove start and ending hyphens
+        return friendlyName;
     }
 };
